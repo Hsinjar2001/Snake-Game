@@ -17,18 +17,18 @@ public class Signup extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        // Use JLayeredPane to manage layers
+        // Use JLayeredPane to manage multiple layers of components
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, 900, 700);
         setContentPane(layeredPane);
 
-        // Set the background image
+        // Set the background image for the signup screen
         ImageIcon backgroundImage = new ImageIcon("Snakeimg.jpg");
         JLabel backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setBounds(0, 0, 900, 700);
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
 
-        // Create the SignUp panel
+        // Create the SignUp panel with GridBagLayout
         JPanel SignupPanel = new JPanel(new GridBagLayout());
         SignupPanel.setOpaque(false);
         SignupPanel.setBounds(130, 50, 700, 500);
@@ -37,7 +37,7 @@ public class Signup extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        // Title Label
+        // Title Label for Signup
         JLabel titleLabel = new JLabel("SIGN UP");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 60));
         titleLabel.setForeground(Color.WHITE);
@@ -47,7 +47,7 @@ public class Signup extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         SignupPanel.add(titleLabel, gbc);
 
-        // Input Fields
+        // Input Fields for user details
         gbc.gridwidth = 1;
         addLabel(SignupPanel, "First Name:", 0, 1, gbc);
         firstNameField = addTextField(SignupPanel, 1, 1, gbc);
@@ -64,7 +64,7 @@ public class Signup extends JFrame {
         addLabel(SignupPanel, "Re-enter Password:", 0, 5, gbc);
         confirmPasswordField = addPasswordField(SignupPanel, 1, 5, gbc);
 
-        // SignUp Button
+        // SignUp Button to save user details
         JButton signUpButton = new JButton("Sign Up");
         styleButton(signUpButton);
         gbc.gridx = 1;
@@ -72,7 +72,7 @@ public class Signup extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
         SignupPanel.add(signUpButton, gbc);
 
-        // Already have an account? Label
+        // Label for existing users to login
         JLabel alreadyAccountLabel = new JLabel("Already have an account?");
         alreadyAccountLabel.setFont(new Font("Arial", Font.BOLD, 17));
         alreadyAccountLabel.setForeground(Color.WHITE);
@@ -82,26 +82,23 @@ public class Signup extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         SignupPanel.add(alreadyAccountLabel, gbc);
 
-        // Login Button
+        // Login Button to redirect users to Login screen
         JButton loginButton = new JButton("Login");
         styleButton(loginButton);
         gbc.gridy = 8;
         SignupPanel.add(loginButton, gbc);
 
-        // Action Listener to save data to file
+        // Action Listener to open Login Screen
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Create an instance of LoginForm and make it visible
                 LoginScreen loginForm = new LoginScreen();
                 loginForm.setVisible(true);
-                // Close the current Signup window
-                dispose();
+                dispose(); // Close current Signup window
             }
         });
-        
 
-        // Action Listener to save data to file
+        // Action Listener to save user data
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,6 +107,7 @@ public class Signup extends JFrame {
         });
     }
 
+    // Method to add labels to the panel
     private void addLabel(JPanel panel, String text, int x, int y, GridBagConstraints gbc) {
         JLabel label = new JLabel(text);
         label.setFont(new Font("Arial", Font.BOLD, 21));
@@ -119,6 +117,7 @@ public class Signup extends JFrame {
         panel.add(label, gbc);
     }
 
+    // Method to add text fields to the panel
     private JTextField addTextField(JPanel panel, int x, int y, GridBagConstraints gbc) {
         JTextField textField = new JTextField(20);
         gbc.gridx = x;
@@ -127,6 +126,7 @@ public class Signup extends JFrame {
         return textField;
     }
 
+    // Method to add password fields to the panel
     private JPasswordField addPasswordField(JPanel panel, int x, int y, GridBagConstraints gbc) {
         JPasswordField passwordField = new JPasswordField(20);
         gbc.gridx = x;
@@ -135,6 +135,7 @@ public class Signup extends JFrame {
         return passwordField;
     }
 
+    // Method to style buttons
     private void styleButton(JButton button) {
         button.setBackground(new Color(0, 94, 93));
         button.setForeground(Color.WHITE);
@@ -142,6 +143,7 @@ public class Signup extends JFrame {
         button.setPreferredSize(new Dimension(120, 32));
     }
 
+    // Method to save user data to a file
     private void saveSignupData() {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
